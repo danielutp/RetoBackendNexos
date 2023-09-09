@@ -22,7 +22,7 @@ public class Cargo {
     @OneToMany(
             fetch = FetchType.EAGER,
             targetEntity = Usuario.class,
-            cascade = CascadeType.REMOVE,
+            cascade = CascadeType.ALL,
             mappedBy = "cargo"
     )
     @JsonManagedReference
