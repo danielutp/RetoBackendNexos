@@ -1,5 +1,6 @@
 package com.co.nexos.mercancia.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -28,4 +29,8 @@ public class Mercancia {
     @Column(name = "fecha_actualizacion", nullable = false, updatable = false)
     private Date fechaActualizacion;
 
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Usuario.class)
+    @JoinColumn(name = "id_usuario")
+    @JsonBackReference
+    private Usuario usuario ;
 }
