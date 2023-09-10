@@ -26,7 +26,6 @@ public class Mercancia {
     private Date fechaIngreso;
 
     @LastModifiedDate
-    @Column(name = "fecha_actualizacion", nullable = false, updatable = false)
     private Date fechaActualizacion;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Usuario.class)
