@@ -13,4 +13,11 @@ public class MercanciaDto {
     private Date fechaIngreso;
 
     private Usuario usuario;
+
+    public MercanciaDto(String nombre, Integer cantidad, Date fechaIngreso, Usuario usuario) {
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.fechaIngreso = fechaIngreso;
+        this.usuario = usuario;
+    }
 }

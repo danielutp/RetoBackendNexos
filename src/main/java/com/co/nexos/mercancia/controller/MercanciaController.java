@@ -1,10 +1,8 @@
 package com.co.nexos.mercancia.controller;
 
 import com.co.nexos.mercancia.config.exceptions.BadRequestException;
-import com.co.nexos.mercancia.domain.Mercancia;
 import com.co.nexos.mercancia.domain.MercanciaDto;
 import com.co.nexos.mercancia.service.MercanciaService;
-import com.co.nexos.mercancia.service.UsuarioService;
 import com.co.nexos.mercancia.utility.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -12,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RequestMapping("/api")
 @RestController
@@ -34,7 +31,7 @@ public class MercanciaController {
         return new ResponseEntity(response, httpStatus);
     }
 
-    @GetMapping(path = "/team/mercancia/{id}")
+    @GetMapping(path = "/mercancia/{id}")
     public ResponseEntity<Response> encontrarMercancia(@PathVariable(value = "id") Integer id) {
         response.restart();
         response.message = "La mercancia es : ";

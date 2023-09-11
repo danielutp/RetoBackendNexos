@@ -1,6 +1,7 @@
 package com.co.nexos.mercancia.service;
 
 import com.co.nexos.mercancia.config.exceptions.BadRequestException;
+import com.co.nexos.mercancia.config.exceptions.NotFoundException;
 import com.co.nexos.mercancia.domain.Mercancia;
 import com.co.nexos.mercancia.domain.MercanciaDto;
 import com.co.nexos.mercancia.mapper.MercanciaMappers;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MercanciaService implements IMercanciaService{
@@ -23,9 +25,10 @@ public class MercanciaService implements IMercanciaService{
     }
 
     @Override
-    public Mercancia findByIdMercancia(Integer id){
-        var mercancia = mercanciaRepository.findById(id);
-        return mercancia.get();
+    public Optional<Mercancia> findByIdMercancia(Integer id){
+        Optional<Mercancia> mercancia = mercanciaRepository.findById(id);
+        if(mercancia.isEmpty()) throw new NotFoundException("Cliente no encontrado");
+        return mercancia;
     }
 
     @Override
