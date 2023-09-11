@@ -5,7 +5,7 @@ import com.co.nexos.mercancia.domain.MercanciaDto;
 
 public class MercanciaMappers {
 
-    public static Mercancia mercanciaDtoConvertirAMercancia(MercanciaDto mercanciaDto) {
+    public Mercancia mercanciaDtoConvertirAMercancia(MercanciaDto mercanciaDto) {
         Mercancia mercancia = new Mercancia();
         mercancia.setNombre(mercanciaDto.getNombre());
         mercancia.setCantidad(mercanciaDto.getCantidad());

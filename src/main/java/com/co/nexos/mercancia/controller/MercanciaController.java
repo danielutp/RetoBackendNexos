@@ -95,12 +95,13 @@ public class MercanciaController {
         }
     }
 
-    @DeleteMapping(path = "/mercancia/{id}")
-    public ResponseEntity<Response> borrarMercancia(@PathVariable(value="id") Integer id) {
+    @DeleteMapping(path = "/mercancia/{id}/{idUser}")
+    public ResponseEntity<Response> borrarMercancia(
+            @PathVariable(value="id") Integer id,
+            @PathVariable(value="idUser") Integer idUser) {
         response.restart();
         try {
-            mercanciaService.eliminarMercancia(id);
-            response.message = "Mercancia eliminada";
+            mercanciaService.eliminarMercancia(id,idUser);
             httpStatus = HttpStatus.OK;
             return new ResponseEntity(response, httpStatus);
         }catch (BadRequestException exception){

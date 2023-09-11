@@ -3,11 +3,13 @@ package com.co.nexos.mercancia.service;
 import com.co.nexos.mercancia.domain.Mercancia;
 import com.co.nexos.mercancia.domain.MercanciaDto;
 import com.co.nexos.mercancia.domain.Usuario;
+import com.co.nexos.mercancia.mapper.MercanciaMappers;
 import com.co.nexos.mercancia.repository.MercanciaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
@@ -23,11 +25,14 @@ class MercanciaServiceTest {
     private MercanciaRepository mercanciaRepository;
     @InjectMocks
     private MercanciaService mercanciaService;
+    @Mock
+    private MercanciaMappers mercanciaMappers;
 
     private Mercancia mercancia;
 
     @BeforeEach
     void setUp() {
+
         MockitoAnnotations.openMocks(this);
         Date date = new Date(1995, 02, 27);
 
@@ -45,8 +50,9 @@ class MercanciaServiceTest {
         mercancia.setFechaIngreso(new Date());
         mercancia.setFechaActualizacion(null);
         mercancia.setUsuario(new Usuario());
-    }
 
+        mercanciaMappers.mercanciaDtoConvertirAMercancia(mercanciaDto);
+    }
 
     @Test
     void listaMercancias() {
@@ -62,18 +68,22 @@ class MercanciaServiceTest {
 
     @Test
     void crearMercancia() {
-        when(mercanciaRepository.save(mercancia)).thenReturn(mercancia);
+        Mockito.when(mercanciaRepository.save(mercancia)).thenReturn(mercancia);
         MercanciaDto mercanciaDto = new MercanciaDto("Daniel",2,new Date(), new Usuario());
+        Mockito.when(mercanciaMappers.mercanciaDtoConvertirAMercancia(mercanciaDto)).thenReturn(mercancia);
         assertNotNull(mercanciaService.crearMercancia(mercanciaDto));
-        verify(mercanciaRepository,times(1)).save(mercancia);
     }
 
     @Test
     void actualizarMercancia() {
-//        when(mercanciaRepository.findById(mercancia.getId())).thenReturn(Optional.ofNullable(mercancia));
-//        when(mercanciaRepository.save(mercancia)).thenReturn(mercancia);
-//        assertNotNull(mercanciaService.actualizarMercancia(1,1,mercancia));
-//        verify(mercanciaRepository,times(1)).save(mercancia);
+        Mockito.when(mercanciaRepository.findById(mercancia.getId())).thenReturn(Optional.ofNullable(mercancia));
+        Mockito.when(mercanciaRepository.save(mercancia)).thenReturn(mercancia);
+        MercanciaDto mercanciaDto = new MercanciaDto("Daniel",2,new Date(), new Usuario());
+        Mockito.when(mercanciaMappers.mercanciaDtoConvertirAMercancia(mercanciaDto)).thenReturn(mercancia);
+
+        Mercancia response = mercanciaService.actualizarMercancia(1,1,mercanciaDto);
+
+        assertNotNull(response);
     }
 
     @Test

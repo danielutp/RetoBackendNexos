@@ -3,6 +3,7 @@ package com.co.nexos.mercancia.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;

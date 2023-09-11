@@ -19,6 +19,8 @@ public class MercanciaService implements IMercanciaService{
     @Autowired
     private MercanciaRepository mercanciaRepository;
 
+    private MercanciaMappers mercanciaMappers = new MercanciaMappers();
+
     @Override
     public List<Mercancia> listaMercancias() {
         return mercanciaRepository.findAll();
@@ -27,7 +29,7 @@ public class MercanciaService implements IMercanciaService{
     @Override
     public Optional<Mercancia> findByIdMercancia(Integer id){
         Optional<Mercancia> mercancia = mercanciaRepository.findById(id);
-        if(mercancia.isEmpty()) throw new NotFoundException("Cliente no encontrado");
+        if(mercancia.isEmpty()) throw new NotFoundException("Mercancia no encontrado");
         return mercancia;
     }
 
@@ -37,30 +39,44 @@ public class MercanciaService implements IMercanciaService{
         if (mercanciaDto.getFechaIngreso().after(date)){
             throw new BadRequestException("La fecha debe ser menor a la actual");
         }
-        Mercancia mercancia = MercanciaMappers.mercanciaDtoConvertirAMercancia(mercanciaDto);
+        Mercancia mercancia = mercanciaMappers.mercanciaDtoConvertirAMercancia(mercanciaDto);
         return mercanciaRepository.save(mercancia);
     }
 
     @Override
     public Mercancia actualizarMercancia(Integer id,Integer idUser, MercanciaDto mercanciaDto) {
         Date date = new Date();
-        Mercancia mercancia = MercanciaMappers.mercanciaDtoConvertirAMercancia(mercanciaDto);
-        mercancia.setId(id);
-        if (mercancia.getFechaIngreso().after(date)) {
-            throw new BadRequestException("La fecha debe ser menor a la actual");
-        } else if (mercancia.getUsuario().getId().equals(idUser) && mercancia.getId() != null){
-            mercancia.setFechaActualizacion(new Date());
-            mercanciaRepository.save(mercancia);
+        Mercancia mercancia = new Mercancia();
+        try{
+            mercancia = mercanciaRepository.findById(id).get();
+        }catch (Exception e){
+            throw new BadRequestException("La mercancia no existe");
         }
+        if (!mercancia.getUsuario().getId().equals(idUser)) {
+            throw new BadRequestException("No es el mismo usuario que lo creo");
+        } else if (mercancia.getFechaIngreso().after(date)) {
+            throw new BadRequestException("La fecha debe ser menor a la actual");
+        }
+        mercancia = mercanciaMappers.mercanciaDtoConvertirAMercancia(mercanciaDto);
+        mercancia.setId(id);
+        mercancia.setFechaActualizacion(new Date());
+        mercanciaRepository.save(mercancia);
         return mercancia;
     }
 
     @Override
-    public Mercancia eliminarMercancia(Integer id) {
-        Mercancia mercancia = mercanciaRepository.findById(id).get();
-        if (mercancia.getId() == null) {
-            throw new BadRequestException ("No existe esa mercancia correctamente");
+    public Mercancia eliminarMercancia(Integer id,Integer idUser) {
+        Mercancia mercancia;
+        try{
+            mercancia = mercanciaRepository.findById(id).get();
+
+        }catch (Exception e){
+            throw new BadRequestException("La mercancia no existe");
         }
+        if (!mercancia.getUsuario().getId().equals(idUser)) {
+            throw new BadRequestException("No es el mismo usuario que lo creo");
+        }
+        mercancia.setFechaActualizacion(new Date());
         mercanciaRepository.delete(mercancia);
         return mercancia;
     }
