@@ -46,6 +46,7 @@ public class MercanciaService implements IMercanciaService{
     @Override
     public Mercancia actualizarMercancia(Integer id,Integer idUser, MercanciaDto mercanciaDto) {
         Date date = new Date();
+
         Mercancia mercancia = new Mercancia();
         try{
             mercancia = mercanciaRepository.findById(id).get();
