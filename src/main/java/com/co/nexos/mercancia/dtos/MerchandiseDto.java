@@ -1,5 +1,6 @@
-package com.co.nexos.mercancia.domain;
+package com.co.nexos.mercancia.dtos;
 
+import com.co.nexos.mercancia.domain.User;
 import lombok.Data;
 
 import java.util.Date;

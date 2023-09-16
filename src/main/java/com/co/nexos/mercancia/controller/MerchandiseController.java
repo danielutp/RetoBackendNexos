@@ -1,7 +1,7 @@
 package com.co.nexos.mercancia.controller;
 
 import com.co.nexos.mercancia.config.exceptions.BadRequestException;
-import com.co.nexos.mercancia.domain.MerchandiseDto;
+import com.co.nexos.mercancia.dtos.MerchandiseDto;
 import com.co.nexos.mercancia.service.MerchandiseService;
 import com.co.nexos.mercancia.utility.Response;
 import org.springframework.beans.factory.annotation.Autowired;

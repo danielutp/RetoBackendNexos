@@ -1,7 +1,7 @@
 package com.co.nexos.mercancia.mapper;
 
 import com.co.nexos.mercancia.domain.Merchandise;
-import com.co.nexos.mercancia.domain.MerchandiseDto;
+import com.co.nexos.mercancia.dtos.MerchandiseDto;
 
 public class MerchandiseMappers {
 

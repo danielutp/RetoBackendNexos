@@ -1,6 +1,6 @@
 package com.co.nexos.mercancia.service;
 
-import com.co.nexos.mercancia.domain.MerchandiseDto;
+import com.co.nexos.mercancia.dtos.MerchandiseDto;
 import com.co.nexos.mercancia.domain.User;
 import com.co.nexos.mercancia.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
