@@ -3,7 +3,6 @@ package com.co.nexos.mercancia.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
@@ -11,7 +10,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "mercancia")
-public class Mercancia {
+public class Merchandise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -29,8 +28,8 @@ public class Mercancia {
     @LastModifiedDate
     private Date fechaActualizacion;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Usuario.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "id_usuario")
     @JsonBackReference
-    private Usuario usuario ;
+    private User user;
 }

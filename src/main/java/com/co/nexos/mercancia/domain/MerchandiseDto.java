@@ -5,19 +5,19 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class MercanciaDto {
+public class MerchandiseDto {
     private String nombre;
 
     private Integer cantidad;
 
     private Date fechaIngreso;
 
-    private Usuario usuario;
+    private User user;
 
-    public MercanciaDto(String nombre, Integer cantidad, Date fechaIngreso, Usuario usuario) {
+    public MerchandiseDto(String nombre, Integer cantidad, Date fechaIngreso, User user) {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.fechaIngreso = fechaIngreso;
-        this.usuario = usuario;
+        this.user = user;
     }
 }

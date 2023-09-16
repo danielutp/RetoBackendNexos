@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,17 +30,17 @@ public class Usuario {
 
     @OneToMany(
             fetch = FetchType.EAGER,
-            targetEntity = Mercancia.class,
+            targetEntity = Merchandise.class,
             cascade = CascadeType.REMOVE,
-            mappedBy = "usuario"
+            mappedBy = "user"
     )
     @JsonManagedReference
-    private List<Mercancia> mercancias = new ArrayList<>();
+    private List<Merchandise> merchandises = new ArrayList<>();
 
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Cargo.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Charge.class)
     @JoinColumn(name = "id_cargo", nullable = false)
     @JsonBackReference
-    private Cargo cargo;
+    private Charge charge;
 
 }

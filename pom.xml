@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.co.nexos</groupId>
-	<artifactId>mercancia</artifactId>
+	<artifactId>merchandise</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Sistema de control de mercancia</name>
+	<name>Sistema de control de merchandise</name>
 	<description>Este es un sistema para el manejo de mercancía para el sector automotriz</description>
 	<properties>
 		<java.version>17</java.version>

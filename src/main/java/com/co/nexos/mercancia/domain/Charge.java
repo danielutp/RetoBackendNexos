@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "cargo")
-public class Cargo {
+public class Charge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -21,11 +21,11 @@ public class Cargo {
 
     @OneToMany(
             fetch = FetchType.EAGER,
-            targetEntity = Usuario.class,
+            targetEntity = User.class,
             cascade = CascadeType.ALL,
-            mappedBy = "cargo"
+            mappedBy = "charge"
     )
     @JsonManagedReference
-    private List<Usuario> usuarios = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
 }

@@ -1,7 +1,7 @@
 package com.co.nexos.mercancia.controller;
 
 
-import com.co.nexos.mercancia.service.UsuarioService;
+import com.co.nexos.mercancia.service.UserService;
 import com.co.nexos.mercancia.utility.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/api/user")
 @RestController
-public class UsuarioController {
+public class UserController {
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UserService userService;
     private Response response = new Response();
 
     private HttpStatus httpStatus = HttpStatus.OK;
@@ -24,7 +24,7 @@ public class UsuarioController {
     public ResponseEntity<Response> listaUsuarioss() {
         response.restart();
         response.message = "La lista de usuarios es : ";
-        response.data = usuarioService.listaUsuarios();
+        response.data = userService.listaUsuarios();
         httpStatus = HttpStatus.OK;
         return new ResponseEntity(response, httpStatus);
     }
